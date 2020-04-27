@@ -6,10 +6,10 @@ orbs:
 jobs:
   test:
     docker:
-      - image: circleci/openjdk:8-jdk-node
+      - image: circleci/openjdk:11-jdk-node
     steps:
       - checkout
-      - restore_cache: 
+      - restore_cache:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       - run: mvn clean verify
       - save_cache:

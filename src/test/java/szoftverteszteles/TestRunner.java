@@ -18,8 +18,4 @@ import org.openqa.selenium.WebDriver;
 public class TestRunner {
     protected static WebDriver driver;
 
-    @AfterClass
-    public static void tearDown(){
-        driver.close();
-    }
 }

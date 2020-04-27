@@ -1,14 +1,16 @@
 package szoftverteszteles.stepdef;
 
 
-
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import szoftverteszteles.TestRunner;
@@ -26,18 +28,22 @@ public class VimeoLink extends TestRunner {
 
     @Given("^I have opened the browser$")
     public void openBrowser() throws MalformedURLException {
-        DesiredCapabilities caps = new DesiredCapabilities();
 
-        caps.setCapability("os", "Windows");
-        caps.setCapability("os_version", "10");
-        caps.setCapability("browser", "Chrome");
-        caps.setCapability("browser_version", "80");
-        caps.setCapability("name", "softvertesteleso1's First Test");
-        caps.setCapability("resolution", "1920x1080");
-        driver = new RemoteWebDriver(new URL(URL), caps);
+        final boolean browserstack = true;
 
-//        WebDriverManager.firefoxdriver().setup();
-//        driver = new FirefoxDriver();
+        if (browserstack) {
+            DesiredCapabilities caps = new DesiredCapabilities();
+            caps.setCapability("os", "Windows");
+            caps.setCapability("os_version", "10");
+            caps.setCapability("browser", "Chrome");
+            caps.setCapability("browser_version", "80");
+            caps.setCapability("name", "softvertesteleso1's First Test");
+            caps.setCapability("resolution", "1920x1080");
+            driver = new RemoteWebDriver(new URL(URL), caps);
+        } else {
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+        }
     }
 
     @When("^I maximize the window$")
@@ -57,18 +63,18 @@ public class VimeoLink extends TestRunner {
 
 
     @Before
-    public void before(Scenario scenario){
+    public void before(Scenario scenario) {
         System.out.println("-------------------------------");
         System.out.println("Starting - " + scenario.getName());
         System.out.println("-------------------------------");
     }
 
     @After
-    public void after(Scenario scenario){
+    public void after(Scenario scenario) {
         System.out.println("-------------------------------");
         System.out.println(scenario.getName() + " Status - " + scenario.getStatus());
         System.out.println("-------------------------------");
-        if (driver != null){
+        if (driver != null) {
             driver.quit();
         }
     }

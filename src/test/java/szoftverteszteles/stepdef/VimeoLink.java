@@ -33,6 +33,7 @@ public class VimeoLink extends TestRunner {
         caps.setCapability("browser", "Chrome");
         caps.setCapability("browser_version", "80");
         caps.setCapability("name", "softvertesteleso1's First Test");
+        caps.setCapability("resolution", "1920x1080");
         driver = new RemoteWebDriver(new URL(URL), caps);
 
 //        WebDriverManager.firefoxdriver().setup();

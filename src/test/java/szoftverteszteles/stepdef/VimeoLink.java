@@ -29,7 +29,7 @@ public class VimeoLink extends TestRunner {
     @Given("^I have opened the browser$")
     public void openBrowser() throws MalformedURLException {
 
-        final boolean browserstack = true;
+        final boolean browserstack = false;
 
         if (browserstack) {
             DesiredCapabilities caps = new DesiredCapabilities();
@@ -60,6 +60,69 @@ public class VimeoLink extends TestRunner {
     public void getLink(String xpath, String linkurl) {
         assertEquals(driver.findElement(By.xpath(xpath)).getAttribute("href"), linkurl);
     }
+
+    @When("^I open the Vimeo login page$")
+    public void goToVimeoLogin(){
+        driver.navigate().to("https://vimeo.com/log_in");
+    }
+
+    @When("^The user enters correct email$")
+    public void enterCorrectEmail(){
+        driver.findElement(By.xpath("//*[@id=\"signup_email\"]")).sendKeys("softvertestelesora@gmail.com");
+    }
+
+    @When("^The user enters correct password$")
+    public void enterCorrectPwd(){
+        driver.findElement(By.xpath("//*[@id=\"login_password\"]")).sendKeys("szoftverteszteles");
+    }
+
+    @When("^The user presses the login button$")
+    public void pressLogin(){
+        driver.findElement(By.xpath("//*[@id=\"login_form\"]/div[5]/input")).click();
+    }
+
+
+    @Then("^The user is redirected to Vimeo's home page$")
+    public void redirectToHome(){
+        assertEquals(driver.getCurrentUrl(), "https://vimeo.com/");
+    }
+
+    @When("^The user enters incorrect password$")
+    public void enterIncorrectPwd(){
+        driver.findElement(By.xpath("//*[@id=\"login_password\"]")).sendKeys("asd");
+    }
+
+    @Then("^A red box is displayed with an error message$")
+    public void getErrorMessage(){
+        assertEquals(driver.findElement(By.xpath("//*[@id=\"login_form\"]/div[4]/div")).getCssValue("background-color"), "rgb(255, 237, 237)");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @Before

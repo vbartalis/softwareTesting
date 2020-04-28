@@ -4,6 +4,7 @@ package szoftverteszteles.stepdef;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,6 +12,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import szoftverteszteles.TestRunner;
@@ -107,7 +109,16 @@ public class VimeoLink extends TestRunner {
         assertEquals(driver.getCurrentUrl(), "https://vimeo.com/manage/videos");
     }
 
-
+    @When("The user clicks on a {string} top menu item with a dropdown list")
+    public void clickOnProduct(String xpath){
+        driver.findElement(By.xpath(xpath)).click();
+    }
+    @Then("The color of a {string} button when hovering over the mouse should be {string} lightgray")
+    public void  getHoverColor(String xpath, String color){
+        Actions a = new Actions(driver);
+        a.moveToElement(driver.findElement(By.xpath(xpath))).perform();
+        assertEquals(driver.findElement(By.xpath(xpath)).getCssValue("background-color"),color);
+    }
 
 
 

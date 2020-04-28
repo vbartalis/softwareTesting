@@ -97,6 +97,16 @@ public class VimeoLink extends TestRunner {
         assertEquals(driver.findElement(By.xpath("//*[@id=\"login_form\"]/div[4]/div")).getCssValue("background-color"), "rgb(255, 237, 237)");
     }
 
+    @When("^The user presses the videos button$")
+    public void pressVideos(){
+        driver.findElement(By.xpath("/html/body/div[1]/div[2]/main/div/div/div[1]/div[1]/div/div[1]/section[2]/div[1]/div/div[3]/span/div/div[2]/div/div")).click();
+    }
+
+    @Then("^The user is redirected to the videos page$")
+    public void redirectedToVideos(){
+        assertEquals(driver.getCurrentUrl(), "https://vimeo.com/manage/videos");
+    }
+
 
 
 

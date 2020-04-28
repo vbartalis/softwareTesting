@@ -26,7 +26,7 @@ public class VimeoLink extends TestRunner {
     public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
 
 
-    @Given("^I have opened the browser$")
+    @Given("^The user has opened the browser$")
     public void openBrowser() throws MalformedURLException {
 
         final boolean browserstack = false;
@@ -46,12 +46,12 @@ public class VimeoLink extends TestRunner {
         }
     }
 
-    @When("^I maximize the window$")
+    @When("^The user maximizes the window$")
     public void maximizeWindow() {
         driver.manage().window().maximize();
     }
 
-    @When("I open the Vimeo {string} website")
+    @When("The user opens the Vimeo {string} website")
     public void goToVimeo(String fromurl) {
         driver.navigate().to(fromurl);
     }
@@ -61,7 +61,7 @@ public class VimeoLink extends TestRunner {
         assertEquals(driver.findElement(By.xpath(xpath)).getAttribute("href"), linkurl);
     }
 
-    @When("^I open the Vimeo login page$")
+    @When("^The user opens the Vimeo login page$")
     public void goToVimeoLogin(){
         driver.navigate().to("https://vimeo.com/log_in");
     }

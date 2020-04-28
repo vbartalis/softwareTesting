@@ -1,9 +1,9 @@
 Feature: VimeoLink
 
   Scenario Outline: Link exists
-    Given I have opened the browser
-    When I maximize the window
-    And I open the Vimeo <fromurl> website
+    Given The user has opened the browser
+    When The user maximizes the window
+    And The user opens the Vimeo <fromurl> website
     Then A link <xpath> should exist on <linkurl> element
 
     Examples:

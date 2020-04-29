@@ -15,6 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.Color;
 import szoftverteszteles.TestRunner;
 
 import java.net.MalformedURLException;
@@ -31,7 +32,7 @@ public class VimeoLink extends TestRunner {
     @Given("^The user has opened the browser$")
     public void openBrowser() throws MalformedURLException {
 
-        final boolean browserstack = true;
+        final boolean browserstack = false;
 
         if (browserstack) {
             DesiredCapabilities caps = new DesiredCapabilities();
@@ -96,16 +97,18 @@ public class VimeoLink extends TestRunner {
 
     @Then("^A red box is displayed with an error message$")
     public void getErrorMessage(){
-        String actual_color = driver.findElement(By.xpath("//*[@id=\"login_form\"]/div[4]/div")).getCssValue("background-color");
-        if (actual_color.contains("rgba")) {
-            String[] Value;
-            Value = actual_color.replace("rgba(", "").replace(")", "").split(", ");
-            String r= Value[0];
-            String g= Value[1];
-            String b= Value[2];
-            actual_color = "rgb("+r+", "+g+", "+b+")";
-        }
-        assertEquals(actual_color, "rgb(255, 237, 237)");
+        Color actual_color = Color.fromString(driver.findElement(By.xpath("//*[@id=\"login_form\"]/div[4]/div")).getCssValue("background-color"));
+        assert actual_color.asRgb().equals("rgb(255, 237, 237)");
+//        String actual_color = driver.findElement(By.xpath("//*[@id=\"login_form\"]/div[4]/div")).getCssValue("background-color");
+//        if (actual_color.contains("rgba")) {
+//            String[] Value;
+//            Value = actual_color.replace("rgba(", "").replace(")", "").split(", ");
+//            String r= Value[0];
+//            String g= Value[1];
+//            String b= Value[2];
+//            actual_color = "rgb("+r+", "+g+", "+b+")";
+//        }
+//        assertEquals(actual_color, "rgb(255, 237, 237)");
     }
 
     @When("^The user presses the videos button$")
@@ -123,27 +126,33 @@ public class VimeoLink extends TestRunner {
         driver.findElement(By.xpath(xpath)).click();
     }
 
-    @Then("The color of a {string} button when hovering over the mouse should be {string} lightgray")
+    @Then("The color of a {string} button when hovering over the mouse should be {string}")
     public void  getHoverColor(String xpath, String color){
         Actions a = new Actions(driver);
         a.moveToElement(driver.findElement(By.xpath(xpath))).perform();
-        String actual_color = driver.findElement(By.xpath(xpath)).getCssValue("background-color");
-        String[] Value;
-        if (actual_color.contains("rgba")) {
-            Value = actual_color.replace("rgba(", "").replace(")", "").split(", ");
-            String r= Value[0];
-            String g= Value[1];
-            String b= Value[2];
-            actual_color = "rgb("+r+", "+g+", "+b+")";
-        }
-        if (color.contains("rgba")){
-            Value = color.replace("rgba(", "").replace(")", "").split(", ");
-            String r= Value[0];
-            String g= Value[1];
-            String b= Value[2];
-            color = "rgb("+r+", "+g+", "+b+")";
-        }
-        assertEquals(actual_color,color);
+        Color actual_color = Color.fromString(driver.findElement(By.xpath(xpath)).getCssValue("background-color"));
+        Color expected_color = Color.fromString(color);
+        assert actual_color.asRgb().equals(actual_color.asRgb()) : "actual_color: " + actual_color + " " + "expected_colour: " + expected_color;
+
+//        Actions a = new Actions(driver);
+//        a.moveToElement(driver.findElement(By.xpath(xpath))).perform();
+//        String actual_color = driver.findElement(By.xpath(xpath)).getCssValue("background-color");
+//        String[] Value;
+//        if (actual_color.contains("rgba")) {
+//            Value = actual_color.replace("rgba(", "").replace(")", "").split(", ");
+//            String r= Value[0];
+//            String g= Value[1];
+//            String b= Value[2];
+//            actual_color = "rgb("+r+", "+g+", "+b+")";
+//        }
+//        if (color.contains("rgba")){
+//            Value = color.replace("rgba(", "").replace(")", "").split(", ");
+//            String r= Value[0];
+//            String g= Value[1];
+//            String b= Value[2];
+//            color = "rgb("+r+", "+g+", "+b+")";
+//        }
+//        assertEquals(actual_color,color);
     }
 
 

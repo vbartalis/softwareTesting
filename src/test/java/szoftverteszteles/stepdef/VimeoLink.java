@@ -32,7 +32,7 @@ public class VimeoLink extends TestRunner {
     @Given("^The user has opened the browser$")
     public void openBrowser() throws MalformedURLException {
 
-        final boolean browserstack = false;
+        final boolean browserstack = true;
 
         if (browserstack) {
             DesiredCapabilities caps = new DesiredCapabilities();

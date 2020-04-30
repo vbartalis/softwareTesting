@@ -14,6 +14,9 @@ import org.slf4j.LoggerFactory;
                 "junit:target/cucumber-reports/Cucumber.xml",
                 "html:target/cucumber-reports" },
         monochrome = true)
+/**
+*TestRunner
+*/
 public class TestRunner {
     /**
      *The class starts the cucumber tests

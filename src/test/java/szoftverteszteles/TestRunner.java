@@ -2,9 +2,9 @@ package szoftverteszteles;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
-import org.junit.AfterClass;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -14,8 +14,13 @@ import org.openqa.selenium.WebDriver;
                 "junit:target/cucumber-reports/Cucumber.xml",
                 "html:target/cucumber-reports" },
         monochrome = true)
-
 public class TestRunner {
-    protected static WebDriver driver;
+    /**
+     *The class starts the cucumber tests
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestRunner.class);  /** Logger */
+    public TestRunner(){
+        LOGGER.info("TestRunner started");
 
+    }
 }

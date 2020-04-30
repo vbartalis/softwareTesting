@@ -36,7 +36,7 @@ public class VimeoLink extends TestRunner {
     private static final String AUTOMATE_KEY = "u1Kj674f1hKni2jnwAxK"; /** browserstack key */
     private static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.BROWSERSTACK.com/wd/hub"; /** browserstack url */
     private static final String SEPARATOR = "-------------------------------"; /** logger separator */
-    private static final boolean BROWSERSTACK = false; /** false = test in local enviroment, true = run in browserstack and circleci */
+    private static final boolean BROWSERSTACK = true; /** false = test in local enviroment, true = run in browserstack and circleci */
     private static WebDriver driver;
 
     /**

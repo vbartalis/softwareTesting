@@ -32,7 +32,7 @@ public class VimeoLink extends TestRunner {
     @Given("^The user has opened the browser$")
     public void openBrowser() throws MalformedURLException {
 
-        final boolean browserstack = true;
+        final boolean browserstack = false;
 
         if (browserstack) {
             DesiredCapabilities caps = new DesiredCapabilities();
@@ -84,6 +84,10 @@ public class VimeoLink extends TestRunner {
         driver.findElement(By.xpath("//*[@id=\"login_form\"]/div[5]/input")).click();
     }
 
+    @When("^The user presses the vimeo button$")
+    public void pressViome(){
+        driver.findElement(By.xpath("//*[@id=\"topnav_desktop\"]/div/a[1]")).click();
+    }
 
     @Then("^The user is redirected to Vimeo's home page$")
     public void redirectToHome(){

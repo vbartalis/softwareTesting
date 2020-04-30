@@ -16,6 +16,6 @@ Feature: Vimeo-login
     When The user enters correct email
     When The user enters incorrect password
     And The user presses the login button
-    Then A <colore> box is displayed with an error message
+    Then A red box is displayed with an error message
 
 
